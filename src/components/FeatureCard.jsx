@@ -1,30 +1,44 @@
-export default function FeatureCard({ title, description }) {
-  const getIcon = () => {
-    if (title.includes("Disease")) return "🌿";
-    if (title.includes("AI")) return "🤖";
-    if (title.includes("Weather")) return "☁️";
-    if (title.includes("Market")) return "📈";
-    return "🌱";
-  };
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
+export default function FeatureCard({
+  icon,
+  title,
+  description,
+  href = "#",
+}) {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 dark:border-slate-700">
-      
-      <div className="text-5xl mb-4">
-        {getIcon()}
+    <div className="group bg-white dark:bg-slate-800 rounded-2xl border border-green-100 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 p-6 text-center">
+
+      {/* Icon */}
+      <div className="w-20 h-20 mx-auto rounded-full bg-green-100 flex items-center justify-center text-green-700 group-hover:bg-green-700 group-hover:text-white transition-all duration-300">
+        {icon}
       </div>
 
-      <h3 className="text-2xl font-bold mb-3 text-gray-800 dark:text-white">
+      {/* Title */}
+      <h3 className="mt-5 text-xl font-bold text-slate-800 dark:text-white">
         {title}
       </h3>
 
-      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+      {/* Divider */}
+      <div className="w-12 h-1 bg-green-600 rounded-full mx-auto my-4"></div>
+
+      {/* Description */}
+      <p className="text-gray-600 dark:text-gray-300 text-[15px] leading-7 min-h-[72px]">
         {description}
       </p>
 
-      <button className="mt-6 text-green-700 font-semibold hover:text-green-800">
-        Learn More →
-      </button>
+      {/* Button */}
+      <Link
+        href={href}
+        className="mt-6 inline-flex items-center justify-center w-11 h-11 rounded-full bg-green-100 text-green-700 hover:bg-green-700 hover:text-white transition-all duration-300"
+      >
+        <ArrowRight
+          size={20}
+          className="transition-transform duration-300 group-hover:translate-x-1"
+        />
+      </Link>
+
     </div>
   );
 }

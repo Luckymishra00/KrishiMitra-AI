@@ -1,61 +1,170 @@
+"use client";
+
+import { useState } from "react";
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
+import {
+  Mail,
+  LockKeyhole,
+  Eye,
+  EyeOff,
+  ArrowRight,
+} from "lucide-react";
+
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <>
       <Navbar />
 
-      <main className="max-w-md mx-auto py-20 px-6">
-        <h1 className="text-3xl font-bold mb-6 dark:text-white">
-          Login
-        </h1>
+      <section className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 flex items-center justify-center px-6 py-20">
 
-        <input
-          className="
-            w-full
-            p-3
-            mb-4
-            rounded-lg
-            border
-            border-gray-300
-            bg-white
-            text-black
-            placeholder-gray-500
-            dark:bg-slate-800
-            dark:text-white
-            dark:placeholder-gray-400
-            dark:border-slate-600
-          "
-          placeholder="Email"
-        />
+        <div className="max-w-6xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden grid lg:grid-cols-2">
 
-        <input
-          type="password"
-          className="
-            w-full
-            p-3
-            mb-4
-            rounded-lg
-            border
-            border-gray-300
-            bg-white
-            text-black
-            placeholder-gray-500
-            dark:bg-slate-800
-            dark:text-white
-            dark:placeholder-gray-400
-            dark:border-slate-600
-          "
-          placeholder="Password"
-        />
+          {/* Left Side */}
 
-        <button className="bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800">
-          Login
-        </button>
-      </main>
+          <div className="hidden lg:flex relative">
+
+            <img
+              src="/login/farmer-login.jpg"
+              alt="Farmer"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <div className="absolute inset-0 bg-black/35"></div>
+
+            <div className="absolute bottom-10 left-10 z-10 text-white">
+
+              <h2 className="text-4xl font-bold">
+                Welcome to
+              </h2>
+
+              <h1 className="text-5xl font-extrabold mt-2">
+                KrishiMitra AI
+              </h1>
+
+              <p className="mt-5 text-lg leading-8 text-green-100 max-w-md">
+                Smart farming begins with intelligent decisions.
+                Manage crops, detect diseases and monitor weather
+                using AI.
+              </p>
+
+            </div>
+
+          </div>
+
+          {/* Right Side */}
+
+          <div className="p-10 lg:p-16 flex flex-col justify-center">
+
+            <h2 className="text-5xl font-bold text-slate-900">
+              Welcome Back 👋
+            </h2>
+
+            <p className="text-gray-500 mt-3 mb-10 text-lg">
+              Login to continue using KrishiMitra AI.
+            </p>
+
+            {/* Email */}
+
+            <div className="relative mb-6">
+
+              <Mail
+                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
+                size={22}
+              />
+
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full rounded-xl border border-gray-300 py-4 pl-14 pr-4 outline-none transition focus:border-green-600 focus:ring-4 focus:ring-green-100"
+              />
+
+            </div>
+
+            {/* Password */}
+
+            <div className="relative mb-5">
+
+              <LockKeyhole
+                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
+                size={22}
+              />
+
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className="w-full rounded-xl border border-gray-300 py-4 pl-14 pr-14 outline-none transition focus:border-green-600 focus:ring-4 focus:ring-green-100"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500"
+              >
+                {showPassword ? (
+                  <EyeOff size={22} />
+                ) : (
+                  <Eye size={22} />
+                )}
+              </button>
+
+            </div>
+
+            {/* Remember + Forgot */}
+
+            <div className="flex items-center justify-between mb-8">
+
+              <label className="flex items-center gap-2 text-gray-600">
+
+                <input
+                  type="checkbox"
+                  className="accent-green-700 w-4 h-4"
+                />
+
+                Remember Me
+
+              </label>
+
+              <button className="text-green-700 hover:underline font-medium">
+                Forgot Password?
+              </button>
+
+            </div>
+
+            {/* Login */}
+
+            <button className="w-full bg-green-700 hover:bg-green-800 transition text-white py-4 rounded-xl text-lg font-semibold shadow-lg flex items-center justify-center gap-3">
+
+              Login
+
+              <ArrowRight size={20} />
+
+            </button>
+
+            {/* Register */}
+
+            <p className="text-center text-gray-500 mt-8">
+
+              Don't have an account?
+
+              <span className="text-green-700 font-semibold ml-2 cursor-pointer hover:underline">
+                Register
+              </span>
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
 
       <Footer />
+
     </>
   );
 }
