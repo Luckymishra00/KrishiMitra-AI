@@ -1,36 +1,213 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌱 KrishiMitra AI
 
-## Getting Started
+An AI-powered smart farming platform that helps farmers detect crop diseases, monitor weather conditions, and receive intelligent farming recommendations.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🌾 Crop Disease Detection
+- 🤖 AI Farming Assistant
+- 🌦️ Live Weather Monitoring
+- 📊 Smart Dashboard
+- 📈 Market Insights (UI)
+- 🔐 Modern Login Page
+- 📱 Responsive Design
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js
+- React.js
+- Tailwind CSS
+- Lucide React Icons
+
+### Backend
+- Node.js
+- Express.js
+
+### Tools
+- Postman
+- Git & GitHub
+- VS Code
+
+---
+
+## 📂 Project Structure
+
+```
+KrishiMitra-AI
+│
+├── backend
+│   ├── server.js
+│   ├── package.json
+│   └── package-lock.json
+│
+├── public
+│   ├── login
+│   └── weather
+│
+├── src
+│   ├── app
+│   ├── components
+│   └── styles
+│
+├── package.json
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Luckymishra00/KrishiMitra-AI.git
+```
+
+Move into the project
+
+```bash
+cd KrishiMitra-AI
+```
+
+### Install Frontend
+
+```bash
+npm install
+```
+
+### Start Frontend
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Runs at
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Backend Setup
 
-To learn more about Next.js, take a look at the following resources:
+Go to backend folder
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd backend
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Install dependencies
 
-## Deploy on Vercel
+```bash
+npm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run backend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+node server.js
+```
+
+Runs at
+
+```
+http://localhost:5000
+```
+
+---
+
+# 📡 API Endpoints
+
+## Home API
+
+```
+GET /
+```
+
+Response
+
+```json
+{
+  "message": "Welcome to KrishiMitra AI Backend 🌱",
+  "status": "Server Running Successfully"
+}
+```
+
+---
+
+## Weather API
+
+```
+GET /api/weather
+```
+
+---
+
+## Disease APIs
+
+### Get All Diseases
+
+```
+GET /api/diseases
+```
+
+### Add Disease
+
+```
+POST /api/disease
+```
+
+### Update Disease
+
+```
+PUT /api/disease/:id
+```
+
+### Delete Disease
+
+```
+DELETE /api/disease/:id
+```
+
+---
+
+## 📷 Project Screenshots
+
+- Home Page
+- Login Page
+- Dashboard
+- Disease Detection
+- Weather Monitoring
+
+---
+
+## 👨‍💻 Developed By
+
+**Lucky Mishra**
+
+MCA Student
+
+Chandigarh University
+
+---
+
+## ⭐ Future Enhancements
+
+- User Authentication
+- AI Chatbot Integration
+- Disease Prediction using Deep Learning
+- Real-Time Weather API
+- Market Price Prediction
+- Farmer Community Forum
+
+---
+
+## 📄 License
+
+This project is developed for learning and internship purposes.
