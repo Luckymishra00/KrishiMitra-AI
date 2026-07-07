@@ -211,3 +211,34 @@ Chandigarh University
 ## 📄 License
 
 This project is developed for learning and internship purposes.
+
+# Week 5 - Backend Development with MongoDB
+
+## Objectives
+- Connect the backend with MongoDB Atlas.
+- Implement CRUD operations using Express.js and Mongoose.
+- Test all APIs using Postman.
+
+## Work Completed
+- Connected MongoDB Atlas using Mongoose.
+- Created MVC folder structure.
+- Created Disease Model.
+- Implemented Controllers.
+- Implemented Routes.
+- Developed REST APIs:
+  - GET /api/diseases
+  - GET /api/diseases/:id
+  - POST /api/diseases
+  - PUT /api/diseases/:id
+  - DELETE /api/diseases/:id
+- Successfully tested all APIs using Postman.
+
+## Technologies Used
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- Postman
+
+## Status
+✅ Week 5 Completed Successfully
