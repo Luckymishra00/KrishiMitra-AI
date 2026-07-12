@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -14,20 +15,53 @@ import {
 } from "lucide-react";
 
 export default function Login() {
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loginUser = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+
+        alert("Login Successful!");
+
+        router.push("/dashboard");
+      } else {
+        alert(data.message || "Login Failed");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Server Error");
+    }
+  };
 
   return (
     <>
       <Navbar />
 
       <section className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 flex items-center justify-center px-6 py-20">
-
         <div className="max-w-6xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden grid lg:grid-cols-2">
 
           {/* Left Side */}
 
           <div className="hidden lg:flex relative">
-
             <img
               src="/login/farmer-login.jpg"
               alt="Farmer"
@@ -37,7 +71,6 @@ export default function Login() {
             <div className="absolute inset-0 bg-black/35"></div>
 
             <div className="absolute bottom-10 left-10 z-10 text-white">
-
               <h2 className="text-4xl font-bold">
                 Welcome to
               </h2>
@@ -51,9 +84,7 @@ export default function Login() {
                 Manage crops, detect diseases and monitor weather
                 using AI.
               </p>
-
             </div>
-
           </div>
 
           {/* Right Side */}
@@ -80,6 +111,8 @@ export default function Login() {
               <input
                 type="email"
                 placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-xl border border-gray-300 py-4 pl-14 pr-4 outline-none transition focus:border-green-600 focus:ring-4 focus:ring-green-100"
               />
 
@@ -97,6 +130,8 @@ export default function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full rounded-xl border border-gray-300 py-4 pl-14 pr-14 outline-none transition focus:border-green-600 focus:ring-4 focus:ring-green-100"
               />
 
@@ -137,21 +172,23 @@ export default function Login() {
 
             {/* Login */}
 
-            <button className="w-full bg-green-700 hover:bg-green-800 transition text-white py-4 rounded-xl text-lg font-semibold shadow-lg flex items-center justify-center gap-3">
-
+            <button
+              onClick={loginUser}
+              className="w-full bg-green-700 hover:bg-green-800 transition text-white py-4 rounded-xl text-lg font-semibold shadow-lg flex items-center justify-center gap-3"
+            >
               Login
-
               <ArrowRight size={20} />
-
             </button>
 
             {/* Register */}
 
             <p className="text-center text-gray-500 mt-8">
-
               Don't have an account?
 
-              <span className="text-green-700 font-semibold ml-2 cursor-pointer hover:underline">
+              <span
+                onClick={() => router.push("/signup")}
+                className="text-green-700 font-semibold ml-2 cursor-pointer hover:underline"
+              >
                 Register
               </span>
 
@@ -164,7 +201,6 @@ export default function Login() {
       </section>
 
       <Footer />
-
     </>
   );
 }

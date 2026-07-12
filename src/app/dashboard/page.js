@@ -1,16 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Loader from "../../components/Loader";
 
 export default function Dashboard() {
+  const router = useRouter();
+
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first.");
+      router.push("/login");
+      return;
+    }
+
+    // Fetch dashboard data
     fetch("http://localhost:5000/api/dashboard")
       .then((res) => {
         if (!res.ok) {
@@ -27,16 +41,32 @@ export default function Dashboard() {
         setError("Unable to connect to the server.");
         setLoading(false);
       });
-  }, []);
+  }, [router]);
+
+  // Logout Function
+  const logout = () => {
+    localStorage.removeItem("token");
+    alert("Logged out successfully.");
+    router.push("/login");
+  };
 
   return (
     <>
       <Navbar />
 
       <main className="max-w-6xl mx-auto py-16 px-6">
-        <h1 className="text-4xl font-bold mb-8 dark:text-white">
-          Farmer Dashboard
-        </h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold dark:text-white">
+            Farmer Dashboard
+          </h1>
+
+          <button
+            onClick={logout}
+            className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg"
+          >
+            Logout
+          </button>
+        </div>
 
         {loading ? (
           <Loader />
@@ -52,7 +82,6 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="grid md:grid-cols-3 gap-6">
-
             <div className="bg-white dark:bg-slate-800 shadow-lg rounded-xl p-6">
               <h2 className="text-4xl font-bold text-green-700 dark:text-green-400">
                 {dashboardData.totalFarmers}
@@ -82,7 +111,6 @@ export default function Dashboard() {
                 Weather Alerts
               </p>
             </div>
-
           </div>
         )}
       </main>

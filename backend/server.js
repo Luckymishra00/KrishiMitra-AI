@@ -1,17 +1,44 @@
 require("dotenv").config();
 
-const diseaseRoutes = require("./routes/diseaseRoutes");
-
 const express = require("express");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
+
 const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
+const diseaseRoutes = require("./routes/diseaseRoutes");
 
 connectDB();
+
 const app = express();
 
+// ------------------------------------
+// Middleware
+// ------------------------------------
 app.use(cors());
 app.use(express.json());
+
+// ------------------------------------
+// Login Rate Limiter
+// ------------------------------------
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  message: {
+    success: false,
+    message: "Too many login attempts. Please try again after 15 minutes.",
+  },
+});
+
+// ------------------------------------
+// Routes
+// ------------------------------------
 app.use("/api/diseases", diseaseRoutes);
+
+// Apply rate limiter only to login requests
+app.use("/api/auth/login", loginLimiter);
+
+app.use("/api/auth", authRoutes);
 
 // ------------------------------------
 // Dashboard Data
@@ -32,6 +59,7 @@ const weatherData = {
   windSpeed: "12 km/h",
   condition: "Sunny",
 };
+
 // ------------------------------------
 // Home Route
 // ------------------------------------
@@ -62,9 +90,6 @@ app.get("/api/weather", (req, res) => {
   });
 });
 
-
-
-
 // ------------------------------------
 // 404 Route Handler
 // ------------------------------------
@@ -87,7 +112,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-
+// ------------------------------------
+// Start Server
+// ------------------------------------
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

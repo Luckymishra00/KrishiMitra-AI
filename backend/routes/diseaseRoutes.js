@@ -2,6 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
+const protect = require("../middleware/authMiddleware");
+
 const {
   getDiseases,
   createDisease,
@@ -10,19 +12,19 @@ const {
   deleteDisease,
 } = require("../controllers/diseaseController");
 
-// GET All Diseases
-router.get("/", getDiseases);
+// GET All Diseases (Protected)
+router.get("/", protect, getDiseases);
 
-// GET Disease By ID
-router.get("/:id", getDiseaseById);
+// GET Disease By ID (Protected)
+router.get("/:id", protect, getDiseaseById);
 
-// POST New Disease
-router.post("/", createDisease);
+// POST New Disease (Protected)
+router.post("/", protect, createDisease);
 
-// UPDATE Disease
-router.put("/:id", updateDisease);
+// UPDATE Disease (Protected)
+router.put("/:id", protect, updateDisease);
 
-// DELETE Disease
-router.delete("/:id", deleteDisease);
+// DELETE Disease (Protected)
+router.delete("/:id", protect, deleteDisease);
 
 module.exports = router;
